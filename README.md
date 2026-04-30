@@ -66,7 +66,8 @@ git clone https://github.com/your-username/Random-Password-Generator.git
 
 ## Preview
 
-<img width="930" height="925" alt="image" src="https://github.com/user-attachments/assets/ec2d2eed-ccd2-408d-8449-1fdb6ba5660c" />
+<img width="697" height="791" alt="image" src="https://github.com/user-attachments/assets/65f183ce-9798-45f2-9e92-84180ef8819f" />
+
 
 
 ---
@@ -97,6 +98,4 @@ This project is open-source and available under the MIT License.
 Subhik L
 GitHub: https://github.com/subhikl23auto-ui
 
----
 
-If you find this project useful, consider giving it a star.
