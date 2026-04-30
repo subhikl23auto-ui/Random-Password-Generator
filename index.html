@@ -1,0 +1,593 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+
+<head>
+  <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Duc🦆Buc — Secure Password Generator</title>
+  <meta name="description"
+    content="Duc🦆Buc: A beautiful, secure password generator with strength analysis, mascot, history, and full customization. Generate unbreakable passwords instantly.">
+  <link rel="preconnect" href="https://fonts.googleapis.com/">
+  <link rel="preconnect" href="https://fonts.gstatic.com/" crossorigin="">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="./style.css">
+</head>
+
+<body>
+  <div class="page-bg">
+    <div class="bg-orb orb1"></div>
+    <div class="bg-orb orb2"></div>
+    <div class="bg-orb orb3"></div>
+    <div class="noise-overlay"></div>
+  </div>
+
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="logo">
+        <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"
+          stroke-linecap="round" stroke-linejoin="round" class="logo-icon">
+          <rect x="3" y="11" width="18" height="11" rx="2" ry="2"></rect>
+          <path d="M7 11V7a5 5 0 0110 0v4"></path>
+          <circle cx="12" cy="16" r="1" fill="currentColor"></circle>
+        </svg>
+        <span class="logo-text">Duc🦆Buc</span>
+        <span class="logo-badge">v2</span>
+      </div>
+      <div class="header-center">
+        <span class="header-tagline">Cryptographically secure passwords, instantly.</span>
+      </div>
+      <div class="header-right">
+        <button class="theme-btn" id="themeBtn" title="Toggle theme" onclick="toggleTheme()">
+          <svg id="themeIcon" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+            stroke-width="2">
+            <circle cx="12" cy="12" r="5"></circle>
+            <path
+              d="M12 1v2M12 21v2M4.22 4.22l1.42 1.42M18.36 18.36l1.42 1.42M1 12h2M21 12h2M4.22 19.78l1.42-1.42M18.36 5.64l1.42-1.42">
+            </path>
+          </svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main class="main-content">
+    <h1 class="sr-only">Duc🦆Buc — Password Generator</h1>
+
+    <div class="app-grid">
+
+      <!-- LEFT COLUMN -->
+      <div class="col-left">
+
+        <!-- GENERATED PASSWORD PANEL -->
+        <div class="panel" id="pwPanel">
+          <div class="panel-header">
+            <svg class="ph-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+              <rect x="2" y="7" width="12" height="8" rx="2"></rect>
+              <path d="M5 7V5a3 3 0 016 0v2"></path>
+            </svg>
+            <span class="panel-title">Generated Password</span>
+            <div class="panel-header-right">
+              <div class="live-dot" title="Live crypto generation"></div>
+              <span class="live-label">Crypto-safe</span>
+            </div>
+          </div>
+          <div class="panel-body">
+
+            <!-- MASCOT AREA -->
+            <div class="mascot-area">
+              <div class="mascot-wrap" id="mascotWrap"
+                style="animation: 2.5s ease-in-out 0s infinite normal none running bob;">
+                <svg id="mascot" viewBox="0 0 90 90" xmlns="http://www.w3.org/2000/svg">
+                  <defs>
+                    <lineargradient id="robotBodyGrad" x1="0%" y1="0%" x2="100%" y2="100%">
+                      <stop offset="0%" stop-color="#6C8EBF"></stop>
+                      <stop offset="100%" stop-color="#4A6FA5"></stop>
+                    </lineargradient>
+                    <lineargradient id="robotFaceGrad" x1="0%" y1="0%" x2="0%" y2="100%">
+                      <stop offset="0%" stop-color="#3A5A8A"></stop>
+                      <stop offset="100%" stop-color="#2C4470"></stop>
+                    </lineargradient>
+                    <filter id="robotGlow">
+                      <fegaussianblur stdDeviation="2.5" result="blur"></fegaussianblur>
+                      <femerge>
+                        <femergenode in="blur"></femergenode>
+                        <femergenode in="SourceGraphic"></femergenode>
+                      </femerge>
+                    </filter>
+                  </defs>
+
+                  <!-- Antenna -->
+                  <line x1="45" y1="8" x2="45" y2="18" stroke="#7A9EC8" stroke-width="2.5" stroke-linecap="round">
+                  </line>
+                  <circle id="antennaDot" cx="45" cy="7" r="4" fill="#5BA3F5" filter="url(#robotGlow)"
+                    style="animation: 2s ease 0s infinite normal none running pulse-dot;"></circle>
+
+                  <!-- Neck -->
+                  <rect x="39" y="62" width="12" height="6" rx="2" fill="#4A6FA5"></rect>
+
+                  <!-- Body (shoulders) -->
+                  <rect x="22" y="68" width="46" height="14" rx="5" fill="url(#robotBodyGrad)"></rect>
+                  <!-- Body bolts -->
+                  <circle cx="30" cy="75" r="2" fill="#7A9EC8" opacity="0.7"></circle>
+                  <circle cx="60" cy="75" r="2" fill="#7A9EC8" opacity="0.7"></circle>
+                  <!-- Body LED strip -->
+                  <rect x="37" y="72" width="16" height="4" rx="2" fill="#1a2a3d" opacity="0.6"></rect>
+                  <rect id="ledBar" x="38" y="73" width="8" height="2" rx="1" fill="#5BA3F5"></rect>
+
+                  <!-- Head -->
+                  <rect x="18" y="18" width="54" height="46" rx="10" fill="url(#robotBodyGrad)"></rect>
+                  <!-- Head shine -->
+                  <rect x="22" y="20" width="24" height="8" rx="4" fill="white" opacity="0.1"></rect>
+
+                  <!-- Face plate -->
+                  <rect x="22" y="24" width="46" height="34" rx="7" fill="url(#robotFaceGrad)"></rect>
+
+                  <!-- Left eye (square robot eye) -->
+                  <rect id="eyeL" x="27" y="31" width="14" height="12" rx="3" fill="#0d1f38"></rect>
+                  <rect id="pupilL" x="31" y="34" width="6" height="6" rx="1.5" fill="#5BA3F5" filter="url(#robotGlow)">
+                  </rect>
+                  <!-- Left eye glint -->
+                  <rect x="32" y="35" width="2" height="2" rx="0.5" fill="white" opacity="0.8"></rect>
+
+                  <!-- Right eye (square robot eye) -->
+                  <rect id="eyeR" x="49" y="31" width="14" height="12" rx="3" fill="#0d1f38"></rect>
+                  <rect id="pupilR" x="53" y="34" width="6" height="6" rx="1.5" fill="#5BA3F5" filter="url(#robotGlow)">
+                  </rect>
+                  <!-- Right eye glint -->
+                  <rect x="54" y="35" width="2" height="2" rx="0.5" fill="white" opacity="0.8"></rect>
+
+                  <!-- Mouth / speaker grille -->
+                  <rect x="29" y="48" width="32" height="7" rx="3.5" fill="#0d1f38"></rect>
+                  <g id="mouthGrid">
+                    <rect id="mg0" x="31" y="50" width="4" height="3" rx="1" fill="#5BA3F5" opacity="0.9"></rect>
+                    <rect id="mg1" x="37" y="50" width="4" height="3" rx="1" fill="#5BA3F5" opacity="0.9"></rect>
+                    <rect id="mg2" x="43" y="50" width="4" height="3" rx="1" fill="#5BA3F5" opacity="0.9"></rect>
+                    <rect id="mg3" x="49" y="50" width="4" height="3" rx="1" fill="#5BA3F5" opacity="0.9"></rect>
+                    <rect id="mg4" x="55" y="50" width="3" height="3" rx="1" fill="#5BA3F5" opacity="0.9"></rect>
+                  </g>
+
+                  <!-- Side bolts on head -->
+                  <circle cx="18" cy="35" r="3" fill="#3A5A8A"></circle>
+                  <circle cx="72" cy="35" r="3" fill="#3A5A8A"></circle>
+                  <circle cx="18" cy="47" r="3" fill="#3A5A8A"></circle>
+                  <circle cx="72" cy="47" r="3" fill="#3A5A8A"></circle>
+
+                  <!-- think bubbles -->
+                  <g id="thinkBubbles" opacity="0" style="transition: opacity 0.3s; opacity: 0;">
+                    <circle cx="62" cy="18" r="7" fill="white" stroke="#D3D1C7" stroke-width="1"></circle>
+                    <circle cx="72" cy="10" r="5" fill="white" stroke="#D3D1C7" stroke-width="1"></circle>
+                    <circle cx="78" cy="4" r="3.5" fill="white" stroke="#D3D1C7" stroke-width="1"></circle>
+                    <circle cx="59.5" cy="18" r="1.5" fill="#888" style="animation:think-dot 1.2s 0s infinite"></circle>
+                    <circle cx="62.2" cy="18" r="1.5" fill="#888" style="animation:think-dot 1.2s 0.2s infinite">
+                    </circle>
+                    <circle cx="64.9" cy="18" r="1.5" fill="#888" style="animation:think-dot 1.2s 0.4s infinite">
+                    </circle>
+                  </g>
+                  <!-- stars -->
+                  <g id="stars" opacity="0" style="transition: opacity 0.3s; opacity: 0;">
+                    <text x="8" y="20" font-size="13" fill="#EF9F27">★</text>
+                    <text x="64" y="18" font-size="10" fill="#D4537E">★</text>
+                    <text x="4" y="40" font-size="8" fill="#5BA3F5">★</text>
+                    <text x="72" y="36" font-size="9" fill="#2EC4A0">★</text>
+                  </g>
+                  <!-- sweat drop -->
+                  <g id="sweatDrop" opacity="0" style="transition: opacity 0.3s; opacity: 0;">
+                    <ellipse cx="74" cy="28" rx="4" ry="6" fill="#85B7EB" opacity="0.8"></ellipse>
+                    <path d="M74 22 L71 28 L77 28 Z" fill="#85B7EB" opacity="0.8"></path>
+                  </g>
+                  <!-- blush -->
+                  <g id="blush" opacity="0">
+                    <circle cx="0" cy="0" r="1"></circle>
+                  </g>
+                  <!-- eyebrows -->
+                  <g id="eyebrows" opacity="0">
+                    <path id="browL" d="M0 0" fill="none"></path>
+                    <path id="browR" d="M0 0" fill="none"></path>
+                  </g>
+                  <!-- mouth -->
+                  <path id="mouth" d="M0 0" fill="none"></path>
+                </svg>
+                <!-- speech bubble -->
+                <div class="bubble" id="bubble">Processing…</div>
+                <!-- confetti container -->
+                <div class="confetti-container" id="confettiBox"></div>
+              </div>
+              <div class="mascot-name">KeyBot</div>
+            </div>
+
+            <!-- PASSWORD DISPLAY -->
+            <div class="pw-header-strip" id="pwHeaderStrip" style="display: flex;">
+              <div class="pw-len-chip" id="pwLenBadge">
+                <svg width="11" height="11" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                  <rect x="2" y="7" width="12" height="8" rx="2"></rect>
+                  <path d="M5 7V5a3 3 0 016 0v2"></path>
+                </svg>
+                <span id="pwLenText">57 CHARS</span>
+              </div>
+            </div>
+            <div class="pw-wrapper">
+              <div class="pw-out" id="pwOut"><span class="pw-placeholder">Hit Generate to start…</span></div>
+            </div>
+
+            <!-- LEGEND -->
+            <div class="legend">
+              <div class="leg">
+                <div class="ldot" style="background:#378ADD"></div>lowercase
+              </div>
+              <div class="leg">
+                <div class="ldot" style="background:#1D9E75"></div>uppercase
+              </div>
+              <div class="leg">
+                <div class="ldot" style="background:#EF9F27"></div>numbers
+              </div>
+              <div class="leg">
+                <div class="ldot" style="background:#D4537E"></div>symbols
+              </div>
+              <div class="leg">
+                <div class="ldot" style="background:#7F77DD"></div>forced
+              </div>
+            </div>
+
+            <!-- ENTROPY ROW -->
+            <div class="erow">
+              <div style="display:flex;align-items:center;gap:14px">
+                <svg class="ering" viewBox="0 0 48 48">
+                  <circle class="ring-bg" cx="24" cy="24" r="20"></circle>
+                  <circle class="ring-fg" id="ringFg" cx="24" cy="24" r="20" stroke-dasharray="125.6"
+                    stroke-dashoffset="125.6" stroke="#D3D1C7"
+                    style="stroke-dashoffset: 0; stroke: rgb(157, 151, 232);"></circle>
+                  <text class="rt" x="24" y="23" id="ringPct">100%</text>
+                  <text class="rt" x="24" y="32" style="font-size:7px;fill:var(--text-tertiary)">safe</text>
+                </svg>
+                <div class="einfo">
+                  <span class="elabel">Entropy</span>
+                  <div style="display:flex;align-items:baseline;gap:4px">
+                    <span class="eval" id="evalEl">339</span>
+                    <span class="eunit">bits</span>
+                  </div>
+                  <span class="ecrack" id="ecrack">~centuries to crack</span>
+                </div>
+              </div>
+              <div class="sstack">
+                <div class="ssegs">
+                  <div class="seg lit" id="sg0" style="background: rgb(157, 151, 232); transition-delay: 0ms;"></div>
+                  <div class="seg lit" id="sg1" style="background: rgb(157, 151, 232); transition-delay: 55ms;"></div>
+                  <div class="seg lit" id="sg2" style="background: rgb(157, 151, 232); transition-delay: 110ms;"></div>
+                  <div class="seg lit" id="sg3" style="background: rgb(157, 151, 232); transition-delay: 165ms;"></div>
+                  <div class="seg lit" id="sg4" style="background: rgb(157, 151, 232); transition-delay: 220ms;"></div>
+                </div>
+                <span class="stag" id="stag" style="color: rgb(157, 151, 232);">Very Strong</span>
+              </div>
+            </div>
+
+            <!-- ACTIONS -->
+            <div class="arow">
+              <button class="btn btn-primary" id="genBtn" onclick="generate()" style="">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M13 8A5 5 0 113 8"></path>
+                  <path d="M13 4v4h-4"></path>
+                </svg>
+                Generate
+              </button>
+              <button class="btn btn-icon" id="copyBtn" onclick="copyPw()" title="Copy password">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <rect x="5" y="5" width="9" height="9" rx="1.5"></rect>
+                  <path d="M3 11V3a1 1 0 011-1h8"></path>
+                </svg>
+                Copy
+              </button>
+              <button class="btn btn-icon" onclick="refreshOne()" title="Swap one random character">
+                <svg width="14" height="14" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+                  <path d="M3 8a5 5 0 009.9-1M13 8a5 5 0 00-9.9 1"></path>
+                  <path d="M11 5l2-2 2 2M5 11l-2 2-2-2"></path>
+                </svg>
+              </button>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- SAMPLE & REFINE PANEL -->
+        <div class="panel">
+          <div class="panel-header">
+            <svg class="ph-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M8 2l2 4 4.5.7-3.2 3.1.7 4.5L8 12l-4 2.3.7-4.5L1.5 6.7 6 6z"></path>
+            </svg>
+            <span class="panel-title">Refine My String</span>
+          </div>
+          <div class="panel-body">
+            <p class="panel-desc">Type your own string — Duc🦆Buc will transform and strengthen it for you.</p>
+
+            <!-- INPUT ROW -->
+            <div class="refine-input-row">
+              <input class="txt-input refine-user-input" type="text" id="userStringInp" placeholder="e.g. mydog2024"
+                maxlength="64" oninput="onUserStringChange()" autocomplete="off" spellcheck="false">
+              <button class="btn btn-primary refine-go-btn" id="refineGoBtn" onclick="loadUserString()">
+                <svg width="13" height="13" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="2">
+                  <path d="M3 8h10M9 4l4 4-4 4"></path>
+                </svg>
+                Refine
+              </button>
+            </div>
+            <div class="input-hint" style="margin-bottom:10px">Your string is never sent anywhere — all processing is
+              local.</div>
+
+            <!-- RESULT -->
+            <div id="sampleWrap" style="display:none">
+              <div class="sample-box">
+                <div class="sample-label-row">
+                  <span class="refine-from-label">Original</span>
+                  <span class="refine-from-val" id="refineOriginal"></span>
+                </div>
+                <div class="refine-arrow">↓ refined by Duc🦆Buc</div>
+                <div class="sample-pw" id="samplePw"></div>
+                <div class="sample-actions">
+                  <span class="sample-tag">Result</span>
+                  <button class="sbtn" onclick="reRefine()">↻ Re-refine</button>
+                  <button class="sbtn discard" onclick="discardSample()">✕ Reset</button>
+                  <button class="sbtn use" onclick="useSample()">✓ Use this</button>
+                </div>
+              </div>
+              <div class="refine-area">
+                <div class="refine-label">Further Tweaks</div>
+                <div class="refine-chips">
+                  <button class="rchip" onclick="refine('more-upper')">+ Uppercase</button>
+                  <button class="rchip" onclick="refine('more-lower')">+ Lowercase</button>
+                  <button class="rchip" onclick="refine('more-num')">+ Numbers</button>
+                  <button class="rchip" onclick="refine('more-sym')">+ Symbols</button>
+                  <button class="rchip" onclick="refine('less-upper')">− Uppercase</button>
+                  <button class="rchip" onclick="refine('less-num')">− Numbers</button>
+                  <button class="rchip" onclick="refine('less-sym')">− Symbols</button>
+                  <button class="rchip" onclick="refine('longer')">Longer +4</button>
+                  <button class="rchip" onclick="refine('shorter')">Shorter −4</button>
+                  <button class="rchip" onclick="refine('memorable')">More memorable</button>
+                  <button class="rchip" onclick="refine('l33t')">L33t speak</button>
+                  <button class="rchip" onclick="refine('pad-sym')">Pad symbols</button>
+                </div>
+              </div>
+            </div>
+
+            <!-- empty state -->
+            <div id="sampleEmpty" class="sample-empty-state">
+              <div class="empty-icon robot-empty-icon">🤖</div>
+              <p class="empty-text">Enter a string above and hit <strong>Refine</strong></p>
+              <p class="empty-sub">Duc🦆Buc will strengthen it while keeping it recognizable.</p>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- HISTORY PANEL -->
+        <div class="panel">
+          <div class="panel-header">
+            <svg class="ph-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="8" cy="8" r="6"></circle>
+              <path d="M8 5v3l2 2"></path>
+            </svg>
+            <span class="panel-title">History</span>
+            <button class="header-clear-btn" onclick="clearHist()">Clear all</button>
+          </div>
+          <div class="panel-body" style="padding:8px">
+            <div class="hist-list" id="histList">
+              <div class="hempty">No history yet — generate a password to get started.</div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+      <!-- RIGHT COLUMN -->
+      <div class="col-right">
+
+        <!-- CONFIGURATION PANEL -->
+        <div class="panel">
+          <div class="panel-header">
+            <svg class="ph-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="8" cy="8" r="2.5"></circle>
+              <path
+                d="M8 1v1.5M8 13.5V15M1 8h1.5M13.5 8H15M3.05 3.05l1.06 1.06M11.89 11.89l1.06 1.06M3.05 12.95l1.06-1.06M11.89 4.11l1.06-1.06">
+              </path>
+            </svg>
+            <span class="panel-title">Configuration</span>
+          </div>
+          <div class="panel-body">
+
+            <div class="config-sec">
+              <div class="sec-label">Password Length</div>
+              <div class="slider-row">
+                <span class="slider-min">6</span>
+                <div class="slider-track">
+                  <input type="range" min="6" max="64" value="16" step="1" id="lenSlider" oninput="onLen(this.value)"
+                    class="slider">
+                  <div class="slider-fill" id="sliderFill"></div>
+                </div>
+                <span class="slider-max">64</span>
+                <span class="snum" id="lenVal">16</span>
+              </div>
+            </div>
+
+            <div class="config-sec">
+              <div class="sec-label">Character Sets</div>
+              <div class="chip-grid">
+                <div class="chip on-l" id="ch-l" onclick="toggleChip('l')">
+                  <div class="cdot"></div>
+                  <div class="chip-info">
+                    <span class="clabel">Lowercase</span>
+                    <span class="ccount">a – z</span>
+                  </div>
+                </div>
+                <div class="chip on-u" id="ch-u" onclick="toggleChip('u')">
+                  <div class="cdot"></div>
+                  <div class="chip-info">
+                    <span class="clabel">Uppercase</span>
+                    <span class="ccount">A – Z</span>
+                  </div>
+                </div>
+                <div class="chip on-n" id="ch-n" onclick="toggleChip('n')">
+                  <div class="cdot"></div>
+                  <div class="chip-info">
+                    <span class="clabel">Numbers</span>
+                    <span class="ccount">0 – 9</span>
+                  </div>
+                </div>
+                <div class="chip" id="ch-s" onclick="toggleChip('s')">
+                  <div class="cdot"></div>
+                  <div class="chip-info">
+                    <span class="clabel">Symbols</span>
+                    <span class="ccount">!@#…</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            <div class="config-sec">
+              <div class="sec-label">
+                Force Include
+                <span class="sec-badge purple">always present</span>
+              </div>
+              <input class="txt-input" type="text" id="includeInp" placeholder="e.g. @#$" oninput="onInclude()"
+                maxlength="20">
+              <div class="input-hint" id="includeHint">Characters shown in <span
+                  style="color:#7F77DD;font-weight:600">purple</span> — guaranteed to appear.</div>
+            </div>
+
+            <div class="config-sec">
+              <div class="sec-label">
+                Exclude Characters
+                <span class="sec-badge red">never used</span>
+              </div>
+              <input class="txt-input" type="text" id="excludeInp" placeholder="e.g. 0Ol1I (ambiguous)"
+                oninput="onExclude()" maxlength="40">
+              <div class="input-hint">Strip characters that look similar or cause issues.</div>
+            </div>
+
+            <div class="config-sec" style="margin-bottom:0">
+              <div class="sec-label">Preset Templates</div>
+              <div class="preset-grid">
+                <button class="preset-btn" onclick="preset('pin')" id="pre-pin">
+                  <span class="preset-icon">🔢</span>
+                  <span class="preset-name">PIN</span>
+                  <span class="preset-desc">6-digit</span>
+                </button>
+                <button class="preset-btn" onclick="preset('web')" id="pre-web">
+                  <span class="preset-icon">🌐</span>
+                  <span class="preset-name">Web</span>
+                  <span class="preset-desc">16 chars</span>
+                </button>
+                <button class="preset-btn" onclick="preset('api')" id="pre-api">
+                  <span class="preset-icon">🔑</span>
+                  <span class="preset-name">API Key</span>
+                  <span class="preset-desc">32 chars</span>
+                </button>
+                <button class="preset-btn" onclick="preset('max')" id="pre-max">
+                  <span class="preset-icon">🛡️</span>
+                  <span class="preset-name">Max</span>
+                  <span class="preset-desc">64 chars</span>
+                </button>
+              </div>
+            </div>
+
+          </div>
+        </div>
+
+        <!-- COMPOSITION PANEL -->
+        <div class="panel">
+          <div class="panel-header">
+            <svg class="ph-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+              <path d="M2 12l4-4 3 3 5-6"></path>
+            </svg>
+            <span class="panel-title">Composition</span>
+          </div>
+          <div class="panel-body">
+            <div class="comp-grid">
+              <div class="ccard">
+                <div class="ccard-lbl">Lowercase</div>
+                <div class="ccard-val" style="color:#185FA5" id="cp-l">0</div>
+                <div class="ccard-bar-wrap">
+                  <div class="ccard-bar" id="bar-l" style="background: rgb(55, 138, 221); width: 0%;"></div>
+                </div>
+              </div>
+              <div class="ccard">
+                <div class="ccard-lbl">Uppercase</div>
+                <div class="ccard-val" style="color:#0F6E56" id="cp-u">0</div>
+                <div class="ccard-bar-wrap">
+                  <div class="ccard-bar" id="bar-u" style="background: rgb(29, 158, 117); width: 0%;"></div>
+                </div>
+              </div>
+              <div class="ccard">
+                <div class="ccard-lbl">Numbers</div>
+                <div class="ccard-val" style="color:#854F0B" id="cp-n">0</div>
+                <div class="ccard-bar-wrap">
+                  <div class="ccard-bar" id="bar-n" style="background: rgb(239, 159, 39); width: 0%;"></div>
+                </div>
+              </div>
+              <div class="ccard">
+                <div class="ccard-lbl">Symbols</div>
+                <div class="ccard-val" style="color:#993556" id="cp-s">0</div>
+                <div class="ccard-bar-wrap">
+                  <div class="ccard-bar" id="bar-s" style="background:#D4537E;width:0%"></div>
+                </div>
+              </div>
+            </div>
+
+            <div class="seg-prev" id="segPrev"></div>
+
+            <div class="comp-legend">
+              <span class="sc t-l">a</span> lowercase &nbsp;
+              <span class="sc t-u">A</span> uppercase &nbsp;
+              <span class="sc t-n">1</span> number &nbsp;
+              <span class="sc t-s">!</span> symbol &nbsp;
+              <span class="sc t-f">*</span> forced
+            </div>
+          </div>
+        </div>
+
+        <!-- TIPS PANEL -->
+        <div class="panel tips-panel">
+          <div class="panel-header">
+            <svg class="ph-icon" viewBox="0 0 16 16" fill="none" stroke="currentColor" stroke-width="1.5">
+              <circle cx="8" cy="8" r="6"></circle>
+              <path d="M8 7v4M8 5h.01"></path>
+            </svg>
+            <span class="panel-title">Security Tips</span>
+          </div>
+          <div class="panel-body">
+            <div class="tip-list">
+              <div class="tip-item">
+                <div class="tip-dot green"></div>
+                <span>Use at least <strong>16 characters</strong> for strong security.</span>
+              </div>
+              <div class="tip-item">
+                <div class="tip-dot blue"></div>
+                <span>Mix all 4 character sets for <strong>maximum entropy</strong>.</span>
+              </div>
+              <div class="tip-item">
+                <div class="tip-dot yellow"></div>
+                <span>Never reuse passwords — store them in a <strong>password manager</strong>.</span>
+              </div>
+              <div class="tip-item">
+                <div class="tip-dot purple"></div>
+                <span>Duc🦆Buc uses <strong>Web Crypto API</strong> — nothing is sent to servers.</span>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </main>
+
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <span>Duc🦆Buc — All generation happens locally in your browser. Zero data transmitted.</span>
+      <span class="footer-right">Built with ❤️ & 🦆;</span>
+    </div>
+  </footer>
+
+  <script src="./app.js"></script>
+
+
+</body>
+
+</html>
