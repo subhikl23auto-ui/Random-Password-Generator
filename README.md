@@ -66,7 +66,8 @@ git clone https://github.com/your-username/Random-Password-Generator.git
 
 ## Preview
 
-Add a screenshot of your project here to give users a visual overview.
+<img width="930" height="925" alt="image" src="https://github.com/user-attachments/assets/ec2d2eed-ccd2-408d-8449-1fdb6ba5660c" />
+
 
 ---
 
